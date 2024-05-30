@@ -1,0 +1,335 @@
+<style>
+  .hero-section{
+
+    padding: {{ section.settings.padding_top_bottom }}px {{ section.settings.padding_left_right }}px;
+    color: white;
+    background-image: url( "{{ section.settings.bg_image |image_url: width: 1500    }}" );
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+</style>
+
+{% if section.blocks.size > 0 %}
+  <div class="hero-section">
+    {% for block in section.blocks %}
+      {% assign align = block.settings.alignment %}
+      {% assign margin = block.settings.margin %}
+      {% assign padding = block.settings.padding %}
+      {% assign font-family = block.settings['font-family'] %}
+      {% assign font-size = block.settings.font_size %}
+
+      <style>
+        .heading-{{ forloop.index }}{
+          text-align: {{align}};
+          margin: {{margin}}px;
+          padding: {{padding}}px;
+          font-family: {{font-family}};
+          font-size: {{font-size}}px;
+        }
+        .heading-{{ forloop.index }} .heading_first_color{
+        color:{{ block.settings.heading_first_color }};
+        }
+
+        .heading-{{ forloop.index }} .heading_last_color{
+        color:{{ block.settings.heading_last_color }};
+        }
+
+         .subheading-{{ forloop.index }}{
+          text-align: {{align}};
+          margin: {{margin}}px;
+          padding: {{padding}}px;
+          font-family: {{font-family}};
+          font-size: {{font-size}}px;
+          color: {{block.settings.color}}
+        }
+        .button-{{ forloop.index }}{
+          background-color: {{ block.settings.bg_color }};
+          color:{{ block.settings.color }};
+          text-align: center;
+          margin: {{margin}}px;
+          padding: {{padding}}px;
+          font-family: {{font-family}};
+          font-size: {{font-size}}px;
+          border-radius: {{ block.settings.border_radius }}px;
+          text-decoration: none;
+          display:inline-block;
+          width: {{ block.settings.button_width}}px;
+          transition: 0.3s;
+        }
+         a.button-{{ forloop.index }}:hover{
+           color: {{ block.settings.hover_text_color}};
+          background-color: {{ block.settings.hover_bg_color}};
+         }
+        .button-box-{{ forloop.index }} {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: {{align}};
+          }
+      </style>
+
+      {% if block.settings.hero_heading_first %}
+        <h2 class="heading-{{ forloop.index }}">
+          <span class="heading_first_color">{{ block.settings.hero_heading_first }}</span>
+
+          <span class="heading_last_color">{{ block.settings.hero_heading_last }}</span>
+        </h2>
+      {% endif %}
+
+      {% if block.settings.sub_heading %}
+        <p class="subheading-{{ forloop.index }}">{{ block.settings.sub_heading }}</p>
+      {% endif %}
+
+      {% if block.settings.button_text %}
+        <div class="button-box-{{ forloop.index }}">
+          <a href="{{ block.settings.button_url }}" class="button-{{ forloop.index }}">
+            {{- block.settings.button_text -}}
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+    "type": "text",
+    "label": "Padding X",
+    "id": "padding_top_bottom",
+    "default": "30"
+  },
+     {
+    "type": "text",
+    "label": "Padding Y",
+    "id": "padding_left_right",
+    "default": "50"
+  },
+    {
+      "type": "image_picker",
+      "label": "Background Image",
+      "id": "bg_image"
+    }
+
+
+  ],
+  "blocks": [{
+    "type": "heading",
+    "name": "Heading",
+    "settings": [
+      {
+      "type": "text",
+      "label": "Heading First Part",
+      "id": "hero_heading_first",
+      "default":"Welcome To",
+        "info": "Maximun 3 word"
+    },{
+      "type": "color",
+      "label": "Heading First Color",
+      "id": "heading_first_color",
+      "default": "#FFFFFF"
+    },
+      {
+      "type": "text",
+      "label": "Heading Last Part",
+      "id": "hero_heading_last",
+      "default":"Our Site",
+         "info": "Maximun 3 word"
+    },
+    {
+      "type": "color",
+      "label": "Heading Last Color",
+      "id": "heading_last_color",
+      "default": "#FF0000"
+    },
+      {
+      "type": "text",
+      "label": "Font size",
+      "id": "font_size",
+      "default": "22"
+    },
+      {
+   "type": "text_alignment",
+   "id": "alignment",
+   "label": "Text alignment",
+   "default": "center"
+    },
+   {
+      "type": "text",
+      "label": "Margin",
+      "id": "margin",
+      "default": "5"
+    },
+      {
+      "type": "text",
+      "label": "Padding",
+      "id": "padding",
+      "default": "0"
+    },
+      {
+      "type": "font_picker",
+      "id": "font-family",
+      "label": "Heading font",
+      "default": "helvetica_n4"
+    }
+
+    ]
+  },
+  {
+  "type": "sub-heading",
+    "name": "Sub Heading",
+    "settings": [{
+      "type": "textarea",
+      "label": "Sub Heading",
+      "id": "sub_heading",
+      "default" : "The key to your success on Fiverr is the brand you build for yourself"
+    },
+      {
+      "type": "color",
+      "id": "color",
+      "label": "Sub Heading Color",
+      "default": "#fff"
+    },{
+      "type": "text",
+      "label": "Font size",
+      "id": "font_size",
+      "default": "16"
+    },
+      {
+   "type": "text_alignment",
+   "id": "alignment",
+   "label": "Text alignment",
+   "default": "center"
+    },
+   {
+      "type": "text",
+      "label": "Margin",
+      "id": "margin",
+      "default": "0"
+    },
+      {
+      "type": "text",
+      "label": "Padding",
+      "id": "padding",
+      "default": "0"
+    },
+      {
+      "type": "font_picker",
+      "id": "font-family",
+      "label": "Font",
+      "default": "helvetica_n4"
+    }
+
+    ]
+  },{
+    "type": "button",
+    "name": "Button",
+    "settings": [
+      {
+      "type": "text",
+      "label": "Button Text",
+      "id": "button_text",
+      "default": "Buy Now"
+    },
+      {
+        "type": "url",
+        "label": "Button Link",
+        "id": "button_url"
+      },
+      {
+      "type": "color",
+      "id": "color",
+      "label": "Font Color",
+      "default": "#fff"
+    },
+      {
+      "type": "range",
+      "id": "button_width",
+      "label": "Button Width",
+      "min": 50,
+        "max": 300,
+        "default": 100,
+      "step": 5
+    },
+      {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Backgorund Color",
+      "default": "#1773B0"
+    },
+      {
+      "type": "text",
+      "label": "Font size",
+      "id": "font_size",
+      "default": "16"
+    },
+      {
+   "type": "select",
+   "id": "alignment",
+   "label": "Button Position",
+   "options": [
+     {
+     "label": "Start",
+     "value": "flex-start"
+   }, {
+     "label": "Middle",
+     "value": "center"
+   }, {
+     "label": "End",
+     "value": "flex-end"
+   }
+
+
+   ],
+        "default":"center"
+    },
+   {
+      "type": "text",
+      "label": "Margin",
+      "id": "margin",
+      "default": "5"
+    },
+      {
+      "type": "text",
+      "label": "Padding",
+      "id": "padding",
+      "default": "10"
+    },{
+      "type": "range",
+      "label": "Border Radius",
+      "id": "border_radius",
+      "min": 0,
+        "max": 25,
+        "step": 1,
+        "default":5
+    },
+      {
+      "type": "font_picker",
+      "id": "font-family",
+      "label": "Font",
+      "default": "helvetica_n4"
+    },{
+      "type": "color",
+      "id": "hover_bg_color",
+      "label": "Hover Background Color",
+      "default": "#1773B0"
+    },{
+      "type": "color",
+      "id": "hover_text_color",
+      "label": "Hover Text Color",
+      "default": "#fff"
+    }
+
+    ]
+  }
+
+
+
+  ],
+  "presets": [{
+    "name": "Hero Section"
+  }]
+}
+{% endschema %}

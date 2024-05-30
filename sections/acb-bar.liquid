@@ -1,0 +1,82 @@
+<style>
+  .acb-header{
+    background-color: {{section.settings.announcment_bg_color}};
+    color: {{section.settings.announcment_text_color}};
+    text-align: center;
+    font-size: {{ section.settings.announcment_f_size }}px;
+    font-style:{{section.settings.font_style}};
+    font-family:{{ section.settings.heading_font}};
+    
+
+  }
+</style>
+
+{% if section.settings.isannouncment %}
+  <div class="acb-header">
+    {{ section.settings.announcment }}
+  </div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Announcement top bar",
+    "settings": [{
+      "type": "text",
+      "label": "Announcment Text",
+      "id": "announcment",
+      "default": "Welcome to my store"
+    },
+      {
+      "type": "checkbox",
+      "label": "Show Announcement",
+      "id": "isannouncment",
+      "default": true
+    }, 
+      {
+      "type": "color",
+      "label": "Announcment text Color",
+      "id": "announcment_text_color",
+      "default": "#FFFFFF"
+    },
+      {
+      "type": "color",
+      "label": "Announcment Background Color",
+      "id": "announcment_bg_color",
+      "default": "#000"
+    },
+       {
+      "type": "text",
+      "label": "Font Size",
+      "id": "announcment_f_size",
+      "default": "16"
+    },
+       {
+  "type": "select",
+  "id": "font_style",
+  "label": "Font Style",
+  "options": [
+    {
+      "value": "normal",
+      "label": "Normal"
+    },
+    {
+      "value": "bold",
+      "label": "Bold"
+    },
+    {
+      "value": "italic",
+      "label": "Italic"
+    }
+  ],
+  "default": "normal"
+},
+      {
+  "type": "font_picker",
+  "id": "heading_font",
+  "label": "Heading font",
+  "default": "helvetica_n4"
+}
+
+
+    ]
+  }
+{% endschema %}

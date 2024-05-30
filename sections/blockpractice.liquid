@@ -1,0 +1,78 @@
+<style>
+  .blockpractice{
+    background-color:#000;
+    color:#fff;
+    padding:10px 30px;
+    text-align:center;
+
+  }
+  .blockpractice .heading{
+    color: {{ section.settings.heading_color}};
+  }
+
+  .blockpractice .subheading{
+    color: {{ section.settings.subheading_color}};
+  }
+</style>
+
+<div class="blockpractice">
+  {% for block in section.blocks %}
+    {% if block.settings.heading %}
+      <h2 class="heading">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% if block.settings.subheading %}
+      <p class="subheading">{{ block.settings.subheading }}</p>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+ {
+  "name": "Block Practice",
+   "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Hello, world!"
+        }
+      ]
+    },
+    {
+      "type": "Sheading",
+      "name": "Sub Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Sub Heading",
+          "default": "This is a sub heading"
+        }
+      ]
+    }
+
+  ],
+   "settings": [{
+     "type": "color",
+     "label": "Heading Color",
+     "default": "#fff",
+     "id": "heading_color"
+   },
+   {
+     "type": "color",
+     "label": "Sub Heading Color",
+     "default": "#fff",
+     "id": "subheading_color"
+   }
+   ],
+  "presets": [{
+    "name": "Block Practice"
+  }]
+}
+{% endschema %}
